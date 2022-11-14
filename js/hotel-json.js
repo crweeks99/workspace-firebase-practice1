@@ -16,13 +16,21 @@ firebase.initializeApp(firebaseConfig);
 // enter data in
 $("input[type='button']").click(function (e) {
   //get the value of form
-
+  var inputdata = $('form').serializeArray();
+  var data={};
+  console.log(inputdata);
+  console.log(inputdata[2].name);
+  console.log(inputdata[2].value);
   /* save the data to database */
+  inputdata.forEach((entry) => {
+    console.log(entry);
+    data[entry.name] = entry.value;
+  });
+  console.log(data);
 
   /* clear the entry */
   $('form')[0].reset();
 });
-
 
 /* array example
 const array1 = ['a', 'b', 'c'];
@@ -31,7 +39,7 @@ array1.forEach(element => console.log(element));
 
 /* read the data from the database */
 
-/*
+
 firebase
   .firestore()
   .collection('hoteldata')
@@ -43,4 +51,4 @@ firebase
       console.log(doc.data().checkout);
     });
   });
-*/
+
